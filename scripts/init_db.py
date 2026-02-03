@@ -9,6 +9,7 @@ from models.user import User
 from models.profile import Profile
 from models.blind_date import BlindDate
 from models.connection import Connection
+from models.confession import Confession
 
 def init_db():
     app = create_app()
@@ -27,6 +28,9 @@ def init_db():
         
         print("Ensuring indexes for Connection...")
         Connection.ensure_indexes()
+        
+        print("Ensuring indexes for Confession...")
+        Confession.ensure_indexes()
         
         print("Database initialization complete.")
 
