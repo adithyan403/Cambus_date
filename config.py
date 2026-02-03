@@ -9,6 +9,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'default-fallback-secret-key'
     MONGODB_SETTINGS = {
         'host': os.environ.get('MONGODB_URI'),
+        'db': 'cambus_date',
         'tlsCAFile': certifi.where()
     }
     
