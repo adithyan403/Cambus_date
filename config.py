@@ -3,10 +3,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import certifi
+
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'default-fallback-secret-key'
     MONGODB_SETTINGS = {
-        'host': os.environ.get('MONGODB_URI')
+        'host': os.environ.get('MONGODB_URI'),
+        'tlsCAFile': certifi.where()
     }
     
     # Email Config - Removed
