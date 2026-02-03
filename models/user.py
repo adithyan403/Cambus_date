@@ -8,7 +8,10 @@ def load_user(user_id):
     return User.objects(pk=user_id).first()
 
 class User(db.Document, UserMixin):
-    meta = {'collection': 'users'}
+    meta = {
+        'collection': 'users',
+        'strict': False
+    }
     
     user_id = db.StringField(required=True, unique=True, max_length=50)
     email = db.StringField(required=True, unique=True, max_length=150)
