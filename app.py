@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from config import Config
-from extensions import db, login_manager, bcrypt, mail
+from extensions import db, login_manager, bcrypt #, mail
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -10,7 +10,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     login_manager.init_app(app)
     bcrypt.init_app(app)
-    mail.init_app(app)
+    # mail.init_app(app)
 
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'info'
