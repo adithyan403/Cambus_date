@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Create Your Profile - CampusDate{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+    <h2>Create Your Profile</h2>
+    <p class="mb-4">Tell us about yourself to find your perfect match!</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" class="form-control" name="full_name" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" name="age" min="18" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender" required>
+                    <option value="">Select...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="college">College / University</label>
+            <input type="text" class="form-control" name="college" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label for="department">Department / Major</label>
+                <input type="text" class="form-control" name="department" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select class="form-control" name="year" required>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                    <option value="5">5th+ / Grad</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Bio (Tell us about yourself)</label>
+            <textarea class="form-control" name="bio" rows="4" maxlength="500"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="interests">Interests (Comma separated)</label>
+            <input type="text" class="form-control" name="interests" placeholder="Reading, Coding, Music, Hiking...">
+        </div>
+
+        <div class="form-group">
+            <label for="looking_for">Looking For</label>
+            <select class="form-control" name="looking_for">
+                <option value="Relationship">Relationship</option>
+                <option value="Friendship">Friendship</option>
+                <option value="Study Buddy">Study Buddy</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="profile_picture">Profile Picture</label>
+            <input type="file" class="form-control" name="profile_picture" accept="image/*">
+        </div>
+
+        <h3 style="margin-top: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">Preferences
+        </h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 1rem;">
+            <div class="form-group">
+                <label for="min_age">Min Age Preference</label>
+                <input type="number" class="form-control" name="min_age" value="18" min="18">
+            </div>
+            <div class="form-group">
+                <label for="max_age">Max Age Preference</label>
+                <input type="number" class="form-control" name="max_age" value="25" min="18">
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="margin-top: 2rem;">Create Profile</button>
+    </form>
+</div>
+{% endblock %}

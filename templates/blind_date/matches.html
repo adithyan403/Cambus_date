@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Blind Match - CampusDate{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Your Blind Match</h2>
+
+    {% if not revealed %}
+    <div class="glass-card" style="max-width: 500px; margin: 30px auto; padding: 40px;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">❓</div>
+        <h3>Mystery Student</h3>
+
+        <div style="text-align: left; margin: 30px 0;">
+            <p><strong>College:</strong> {{ profile.college }}</p>
+            <p><strong>Gender:</strong> {{ profile.gender }}</p>
+            <p><strong>Interests:</strong> {{ ', '.join(profile.interests) }}</p>
+        </div>
+
+        <p>Do you want to reveal their profile?</p>
+
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
+            <a href="{{ url_for('blind_date.respond', bd_id=date.id, response='yes') }}" class="btn-primary"
+                style="background: var(--success); width: auto;">Yes, I'm Interested</a>
+            <a href="{{ url_for('blind_date.respond', bd_id=date.id, response='no') }}" class="btn-primary"
+                style="background: #555; width: auto;">No, Next</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="glass-card" style="max-width: 800px; margin: 30px auto;">
+        <h1 style="color: var(--primary-color);">It's a Match! 🎉</h1>
+        <p>Both of you are interested. Here is their full profile:</p>
+
+        <div class="profile-card" style="margin: 30px auto; max-width: 350px;">
+            <img src="{{ url_for('static', filename='uploads/' + profile.profile_picture) }}"
+                style="width: 100%; height: 300px; object-fit: cover;">
+            <div style="padding: 20px;">
+                <h3>{{ profile.full_name }}</h3>
+                <p>{{ profile.bio }}</p>
+                <a href="{{ url_for('profile.view_public', user_id=profile.id) }}" class="btn-primary">View Full
+                    Profile</a>
+            </div>
+        </div>
+
+        <button class="btn-primary" style="width: auto;">Schedule a Date</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

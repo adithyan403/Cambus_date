@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Match Suggestions - CampusDate{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center" style="margin-bottom: 30px;">Your Top Matches</h2>
+
+    {% if matches %}
+    <div class="card-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+        {% for item in matches %}
+        {% set profile = item.profile %}
+        {% set score = item.score %}
+
+        <div class="glass-card profile-card" style="padding: 0; overflow: hidden; position: relative;">
+            <div class="match-badge"
+                style="position: absolute; top: 10px; right: 10px; background: var(--primary-color); color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; z-index: 2;">
+                {{ score|int }}% Match
+            </div>
+
+            <div style="height: 250px; overflow: hidden;">
+                {% if profile.profile_picture %}
+                <img src="{{ url_for('static', filename='uploads/' + profile.profile_picture) }}"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                <div
+                    style="width: 100%; height: 100%; background: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                    {{ profile.full_name[0] }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div style="padding: 20px;">
+                <h3>{{ profile.full_name }}, {{ profile.age }}</h3>
+                <p style="color: #ddd;">{{ profile.college }}</p>
+                <p style="font-size: 0.9rem; margin-top: 5px;">{{ profile.department }} • {{ profile.year }} Year</p>
+
+                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                    <a href="{{ url_for('profile.view_public', user_id=profile.user_id.id) }}" class="btn-primary"
+                        style="flex: 1; text-align: center; font-size: 0.9rem;">View Profile</a>
+                    <a href="{{ url_for('connection.send_request', user_id=profile.user_id.id) }}" class="btn-primary"
+                        style="flex: 1; text-align: center; font-size: 0.9rem; background: transparent; border: 1px solid var(--primary-color);">Connect</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="glass-card text-center">
+        <h3>No matches found yet!</h3>
+        <p>Try updating your preferences or wait for more users to join.</p>
+        <a href="{{ url_for('profile.edit') }}" class="btn-primary"
+            style="display: inline-block; width: auto; margin-top: 20px;">Update Preferences</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Blind Date - CampusDate{% endblock %}
+
+{% block content %}
+<div class="glass-card text-center" style="max-width: 600px; margin: 50px auto;">
+    <h1 style="color: var(--primary-color); font-size: 3rem;">Blind Date</h1>
+    <p style="font-size: 1.2rem; margin: 20px 0;">
+        Take a chance on love! Get paired anonymously based on compatibility.
+        Names and photos are hidden until you both say YES.
+    </p>
+
+    <div style="margin: 40px 0;">
+        <!-- Placeholder for icon -->
+        <div style="font-size: 5rem;">🎭</div>
+    </div>
+
+    <a href="{{ url_for('blind_date.join_pool') }}" class="btn-primary"
+        style="display: inline-block; width: auto; font-size: 1.5rem; padding: 15px 40px;">
+        Find Me a Date
+    </a>
+</div>
+{% endblock %}

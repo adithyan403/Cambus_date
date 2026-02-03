@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}My Connections - CampusDate{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom: 40px;">
+        <h2>Connection Requests</h2>
+        <!-- Need to fetch these from DB in the route, assuming pass in 'requests' -->
+        {% if requests %}
+        <div class="card-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            {% for req in requests %}
+            <div class="glass-card" style="padding: 15px;">
+                <h4>{{ req.sender_id.profile_id.full_name }}</h4>
+                <p>{{ req.sender_id.profile_id.college }}</p>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="{{ url_for('connection.accept_request', conn_id=req.id) }}" class="btn-primary"
+                        style="padding: 5px 10px; font-size: 0.9rem;">Accept</a>
+                    <a href="{{ url_for('connection.reject_request', conn_id=req.id) }}" class="btn-primary"
+                        style="padding: 5px 10px; font-size: 0.9rem; background: #666;">Reject</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color: #aaa;">No pending requests.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>Your Connections</h2>
+        <!-- Need to fetch these from DB as 'friends' -->
+        {% if friends %}
+        <div class="card-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            {% for friend in friends %}
+            <div class="glass-card" style="padding: 15px;">
+                <!-- Check who is the friend (sender or receiver) -->
+                {% set friend_user = friend.sender_id if friend.receiver_id == current_user else friend.receiver_id %}
+                <h4>{{ friend_user.profile_id.full_name }}</h4>
+                <p>{{ friend_user.profile_id.department }}</p>
+                <a href="{{ url_for('profile.view_public', user_id=friend_user.id) }}"
+                    style="color: var(--primary-color);">View Profile</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color: #aaa;">You haven't connected with anyone yet. Check your Match Suggestions!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

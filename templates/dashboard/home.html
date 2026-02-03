@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CampusDate{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h2>Welcome, {{ user.email }}</h2>
+    <p>This is your dashboard. Complete your profile to start matching!</p>
+
+    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+        <a href="{{ url_for('profile.create') }}" class="btn-primary"
+            style="text-align: center; display: inline-block; width: auto; padding: 10px 20px;">
+            Create Profile
+        </a>
+        <!-- Add more dashboard actions here -->
+    </div>
+</div>
+{% endblock %}

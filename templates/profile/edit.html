@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - CampusDate{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h2>Edit Profile</h2>
+    <p>Form similar to create, pre-filled with data...</p>
+    <!-- Simplified for now, would replicate create form with value="{{ profile.field }}" -->
+    <a href="{{ url_for('profile.view_me') }}">Back to Profile</a>
+</div>
+{% endblock %}

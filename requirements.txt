@@ -1,0 +1,12 @@
+Flask==2.2.5
+Werkzeug==2.2.3
+pymongo
+flask-login
+flask-bcrypt
+flask-mail
+python-dotenv
+Pillow
+email-validator
+gunicorn
+MongoEngine
+flask-mongoengine
